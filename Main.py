@@ -84,7 +84,7 @@ def writeToFile(data):
 
 def main():
     tracks = get_tracks_from_multiple_playlists(targetUser, targetPlaylistIDs)
-    print('total number of tracks is ', len(tracks))
+    # print('total number of tracks is ', len(tracks))
     uris = getURIfromTrack(tracks)
     features = getFeaturesFromURI(uris)
     organizedfeatures = organizedObjs(features)
