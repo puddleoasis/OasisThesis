@@ -7,10 +7,7 @@ myToken = 'BQCOBdUTw93XyGNz5MGQnVT9X8cc026JspzmhAYh4Vzz1mwAfEdmzYiPOtzysgYiDMgOp
 
 sp = spotipy.Spotify(auth=myToken)
 
-
-# targetUser = 'bhavika'
-# targetPlaylistIDs = ['6f0QUSOezP5eBsaqbGcfhm', '78fZg3zrL9ra7MK8ogbw5o', '07cd841eYlduy8eQFoYfVU', '6iERYr736MfE3nrX716aLY', '78b1gPaRqiVwsjAa4Kf4X5', '6UjjRACBJn4twWyVCbdTSZ', '28vgvXIBgydwfVuKTeFbPd', '2WhfT5eDKn1IViLKRh31Hh', '38uhJMh7FwthRNNDR1a4r2', '6usaf2mG6xionTydmfhzRb', '4izebbDXU3mA3nBUpNRgPd', '3ybfE0Ls3SVxwe9xjuymxQ', '4lDMzQGJ0WTPZnarer1fvi', '2po6YXZgf1WQUPFFmhaMmz', '0y9uk8jUHMJseJkL6xDOXq', '7bZZSLc0dQlEj59tkcXXIb', '0Y1yyb3Uw1ixNFpiBGHHqO', '5Plzd6FBgKm0GcffCuoGZi', '0RVgirhL6ToF5GGGuks1Wh', '05UhiZt3EbWwO26mIpW6D2']
-
+uri_file_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MappingMaterials/merged_track_and_spotify/mergedIDs.csv'
 
 def organizeObj(fo):
 
@@ -78,16 +75,21 @@ def get_tracks_from_multiple_playlists(username, playlist_ids):
         results.extend(tracks)
     return results
 
-def writeToFile(data):
-    with open('SpotifyData.json', 'w') as outfile:
-        json.dump(data, outfile)
+# def writeToFile(data):
+#     with open(out_file_path + 'SemanticFeatures', 'w') as out_file:
+
+
+def get_uris(file_path):
+    uris = []
+    with open(file_path, "r") as uri_files:
+        if
+
 
 def main():
-    tracks = get_tracks_from_multiple_playlists(targetUser, targetPlaylistIDs)
-    # print('total number of tracks is ', len(tracks))
-    uris = getURIfromTrack(tracks)
-    features = getFeaturesFromURI(uris)
-    organizedfeatures = organizedObjs(features)
-    writeToFile(organizedfeatures)
+    spotify_uris = get_uris(uri_file_path)
+    features = get_features_from_uris(spotify_uris)
+    # features = getFeaturesFromURI(uris)
+    # organizedfeatures = organizedObjs(features)
+    # writeToFile(organizedfeatures)
 
 main()
