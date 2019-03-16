@@ -21,7 +21,7 @@ def translate(value, leftMin=0, leftMax=13, rightMin=0, rightMax=360*1.75):
 #37
 # def get_RGB_color(h, s=randint(32, 42), l=55):
 #     return color.hls_to_rgb((h%360)/360.0, l/100.0, s/100.0)
-def get_RGB_color(h, s=randint(47, 57), l=55):
+def get_RGB_color(h, s=randint(32, 42), l=55):
     h = (h % 360) / 360.0
     l /= 100
     c = (h, l, s / 100.0)
@@ -29,12 +29,10 @@ def get_RGB_color(h, s=randint(47, 57), l=55):
     return color.hls_to_rgb(c[0],c[1],c[2]), color.hls_to_rgb(b[0],b[1],b[2])
 
 
-plt.figure(figsize=(12, 12))
-plt.rcParams.update({'font.size': 20})
-
 
 # values taken from Genre_Distribution.rtf
-values = [(193166, 'Pop/Rock'), (28352, 'Electronic'), (15953, 'Rap'), (15167, 'Latin'), (14345, 'Jazz'), (12008, 'International'), (10711, 'RnB'), (9763, 'Country'), (5639, 'Blues'), (5491, 'Reggae'), (5016, 'Folk'), (4696, 'Vocal'), (3162, 'New Age')]
+# values = [(193166, 'Pop/Rock'), (28352, 'Electronic'), (15953, 'Rap'), (15167, 'Latin'), (14345, 'Jazz'), (12008, 'International'), (10711, 'RnB'), (9763, 'Country'), (5639, 'Blues'), (5491, 'Reggae'), (5016, 'Folk'), (4696, 'Vocal'), (3162, 'New Age')]
+values [(0.368, 'Acousticness'), (0.602, 'Danceability'), (0.522, 'Energy'), 'Instrumentalness', 'Liveness', 'Loudness', 'Speechiness', (0.63, 'Valence')]
 
 label = [x[1] for x in values]
 data = [x[0] for x in values]
@@ -56,8 +54,9 @@ explode = [mapFromTo(n, min(data), max(data), 0.1, 0.04) for n in data]
 # Plot
 wedges, texts, autotexts = plt.pie(data, startangle=90, explode=explode, radius=1.5, colors=main, autopct=my_autopct, pctdistance=0.52)
 [text.set_color('white') for text in autotexts]
+[text.set_size(9.5) for text in autotexts]
 [wedge.set_edgecolor(border[i]) for i, wedge in enumerate(wedges)]
-[wedge.set_linewidth(explode[i]*15) for i, wedge in enumerate(wedges)]
+[wedge.set_linewidth(explode[i]*5) for i, wedge in enumerate(wedges)]
 
 
 plt.legend(wedges, label,
@@ -71,5 +70,5 @@ fig.gca().add_artist(centre_circle)
 
 plt.tight_layout()
 
-plt.savefig('/Users/nathanoasis/downloads/genre_distribution1.eps', format='eps', dpi=300, bbox_inches='tight')
+plt.savefig('/Users/nathanoasis/downloads/genre_distribution1.eps', format='eps', dpi=1200)
 plt.show()
