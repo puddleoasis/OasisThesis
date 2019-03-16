@@ -11,62 +11,37 @@ client_secret = 'b9a168382c594ce1b142be1a313c386c'
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-uri_file_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MappingMaterials/merged_track_and_spotify/mergedIDs.csv'
+uri_file_path = '/Users/libuser/PycharmProjects/OasisThesis/text/IDs_and_Genre.csv'
 out_features_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MappingMaterials/Semantic_Info/spotify_features.csv'
 failed_out_features_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MappingMaterials/Semantic_Info/failed_spotify_uris.csv'
-# out_features_path_temp = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MappingMaterials/Semantic_Info/spotify_features_unparsed.csv'
 
 
 def to_csv(fo):
     try:
         oo = str(fo['id']) + ',' + str(fo['danceability']) + ',' + str(fo['energy']) + ',' + str(
-            fo['loudness']) + ',' + str(fo['speechiness']) + ',' + str(fo['acousticness']) + str(
+            fo['loudness']) + ',' + str(fo['speechiness']) + ',' + str(fo['acousticness']) + ',' + str(
             fo['instrumentalness']) + ',' + str(fo['liveness']) + ',' + str(fo['valence']) + ',' + str(
-            fo['tempo']) + ',' + str(fo['key']) + ',\n'
+            fo['tempo']) + ',' + str(fo['key']) + '\n'
         return oo
     except ValueError as e:
         return str(fo['id'])
 
 
-# def get_features_from_uris(uris):
-#     features = []
-#
-#     chunkSz = 50
-#     extra = len(uris) % chunkSz
-#     evenGroups = len(uris) - extra
-#     with open(out_features_path_temp, 'w') as out_file_temp:
-#         out_file_temp.write('spotify_id,danceability,energy,loudness,speechiness,acousticness,instrumentalness,liveness,valence,tempo,key,\n')
-#         for i in range(0, evenGroups, chunkSz):
-#             features50 = sp.audio_features(uris[i: i + chunkSz])
-#             out_file_temp.write(features50)
-#             features.extend(features50)
-#         featuresRest = sp.audio_features(uris[-extra:])
-#         out_file_temp.write(featuresRest)
-#         features.extend(featuresRest)
-#
-#     return features
-
 def get_features_from_uris(uris):
-    # features = []
-
     chunkSz = 50
     extra = len(uris) % chunkSz
     evenGroups = len(uris) - extra
     with open(out_features_path, 'w') as out_file_temp:
-        out_file_temp.write('spotify_id,danceability,energy,loudness,speechiness,acousticness,instrumentalness,liveness,valence,tempo,key,\n')
+        out_file_temp.write('spotify_id,danceability,energy,loudness,speechiness,acousticness,instrumentalness,liveness,valence,tempo,key\n')
         for i in range(0, evenGroups, chunkSz):
             features50 = sp.audio_features(uris[i: i + chunkSz])
             organized_features = organized_objs(features50)
             for feature in organized_features:
                 out_file_temp.write(feature)
-            # out_file_temp.write(features50)
-            # features.extend(features50)
         featuresRest = sp.audio_features(uris[-extra:])
         organized_features = organized_objs(featuresRest)
         for feature in organized_features:
             out_file_temp.write(feature)
-        # out_file_temp.write(featuresRest)
-        # features.extend(featuresRest)
 
     # return features
 
@@ -87,11 +62,11 @@ def organized_objs(featureObjs):
 
 def get_uris(file_path):
     uris = []
-    spotify_url_len = len('6i9aLGfG1Id1oCcpgmRjmE')
     with open(file_path, "r") as uri_files:
         for line in uri_files:
             if line[0] is not '#':
-                uris.append(line[-spotify_url_len-2:-2])
+                uri = line.split(',')[1]
+                uris.append(uri)
     return uris
 
 
