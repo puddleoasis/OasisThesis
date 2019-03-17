@@ -6,8 +6,9 @@
 # Importing library
 master_cvs_IN_PATH = '/Users/libuser/PycharmProjects/OasisThesis/text/IDs_and_Genre.csv'
 master_cvs_OUT_PATH = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/merge_testing1.csv'
-low_level_feature_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MSD Benchmarks/CSV/Low-Level_Features/Method_of_Moments.csv'
+# low_level_feature_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MSD Benchmarks/CSV/Low-Level_Features/Method_of_Moments.csv'
 # low_level_feature_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MSD Benchmarks/CSV/Low-Level_Features/Spectral_All.csv'
+low_level_feature_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MSD Benchmarks/CSV/Rhythm_Features/Rhythm_Histograms.csv'
 error_id_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/no_structal_features.csv'
 # import os
 #
@@ -25,7 +26,7 @@ with open(master_cvs_IN_PATH, "r") as master_IN:
 feature_map = {}
 with open(low_level_feature_path, "r") as feature_path:
     for line in feature_path:
-        line = line.rstrip().split(',')
+        line = line.rstrip().rstrip(',').split(',')
         feature_id = line[-1].lstrip('\'').rstrip('\'')
         if feature_id in track_ids_included:
             feature_map[feature_id] = ','.join(line[:-1])
@@ -38,7 +39,7 @@ with open(master_cvs_IN_PATH, "r") as master_IN:
             line_id = line_in[0]
             if line_id in feature_map:
                 feature_line = feature_map[line_id]
-                first_bit = ','.join(line_in[:4])
+                first_bit = ','.join(line_in[:-1])
                 genre = line_in[-1]
                 combined_line = first_bit + ',' + feature_line + ',' + genre
                 outFile.write(combined_line)
