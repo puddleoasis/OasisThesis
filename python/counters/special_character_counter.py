@@ -2,14 +2,18 @@ from string import ascii_lowercase
 from string import ascii_uppercase
 from string import digits
 
-file_path = '/Users/nathanoasis/PycharmProjects/SpotifyMSD/text/IDs_and_Genre.csv'
+file_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/FinalMaster3.csv'
 #
 acceptable_charset = set(ascii_lowercase + ascii_uppercase + digits)
 all_chars = set()
 
 with open(file_path, 'r') as in_file:
-    for line in in_file:
-        for c in line:
-            all_chars.add(c)
+    for i, line in enumerate(in_file):
+        if i == 0:
+            print(line)
+            for c in line:
+                all_chars.add(c)
 
-print(list(all_chars - acceptable_charset))
+            print(list(all_chars - acceptable_charset))
+        else:
+            break
