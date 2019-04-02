@@ -2,8 +2,8 @@ from string import ascii_lowercase
 from string import ascii_uppercase
 from string import digits
 
-file_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/FinalMaster3.csv'
-#
+# file_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/IDs_and_GenrePostParse.csv'
+
 acceptable_charset = set(ascii_lowercase + ascii_uppercase + digits)
 all_chars = set()
 

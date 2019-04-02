@@ -12,8 +12,7 @@ import tempfile
 SEARCH_ON_ID = 1 # search on spotify id
 
 # Paths
-# master_cvs_IN_PATH = '/Users/libuser/PycharmProjects/OasisThesis/text/IDs_and_Genre.csv'
-# master_cvs_OUT_PATH = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/Master.csv'
+
 error_id_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/no_structal_features.csv'
 
 low_level_feature_dir = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MSD Benchmarks/CSV/Low-Level_Features/'
@@ -27,8 +26,8 @@ mid_level_feature_file2 = 'Statistical_Spectrum_Descriptors.csv'
 mid_level_feature_paths = [mid_level_feature_dir+mid_level_feature_file1, mid_level_feature_dir+mid_level_feature_file2]
 
 
-master_cvs_IN_PATH = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/Master01234567.csv'
-master_cvs_OUT_PATH = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/FinalMaster2.csv'
+master_cvs_IN_PATH = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/Master_2.0.csv'
+master_cvs_OUT_PATH = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/Master_2.1.csv'
 
 feature_paths = ['/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/spotify_features.csv']
 # feature_paths = []
