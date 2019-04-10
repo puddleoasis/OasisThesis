@@ -74,7 +74,7 @@ with open(master_cvs_IN_PATH, "r") as master_IN:
                 feature_str = ''
                 try:
                     for feature_key in included_feature_paths:
-                        feature_str += feature_dicts[feature_key][msd_id]
+                        feature_str += (feature_dicts[feature_key][msd_id] + ',')
                     spot_features = feature_dicts[Spotify][spotify_id]
                     s = idstxt + ',' + feature_str + ',' + spot_features + ',' + genre
                     the_out_file.write(s)
