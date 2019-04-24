@@ -12,8 +12,8 @@ client_credentials_manager = SpotifyClientCredentials(client_id=client_id, clien
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 uri_file_path = '/Users/libuser/PycharmProjects/OasisThesis/text/IDs_and_Genre.csv'
-out_features_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MappingMaterials/Semantic_Info/spotify_features.csv'
-failed_out_features_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/MappingMaterials/Semantic_Info/failed_spotify_uris.csv'
+out_features_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/spotify_features.csv'
+failed_out_features_path = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/failed_spotify_features.csv'
 
 
 def to_csv(fo):
@@ -21,7 +21,7 @@ def to_csv(fo):
         oo = str(fo['id']) + ',' + str(fo['danceability']) + ',' + str(fo['energy']) + ',' + str(
             fo['loudness']) + ',' + str(fo['speechiness']) + ',' + str(fo['acousticness']) + ',' + str(
             fo['instrumentalness']) + ',' + str(fo['liveness']) + ',' + str(fo['valence']) + ',' + str(
-            fo['tempo']) + ',' + str(fo['key']) + '\n'
+            fo['tempo']) + ',' + str(fo['key']) + ',' + str(fo['mode']) + '\n'
         return oo
     except ValueError as e:
         return str(fo['id'])
@@ -31,17 +31,17 @@ def get_features_from_uris(uris):
     chunkSz = 50
     extra = len(uris) % chunkSz
     evenGroups = len(uris) - extra
-    with open(out_features_path, 'w') as out_file_temp:
-        out_file_temp.write('spotify_id,danceability,energy,loudness,speechiness,acousticness,instrumentalness,liveness,valence,tempo,key\n')
+    with open(out_features_path, 'w') as out_file:
+        out_file.write('spotify_id,danceability,energy,loudness,speechiness,acousticness,instrumentalness,liveness,valence,tempo,key,mode\n')
         for i in range(0, evenGroups, chunkSz):
             features50 = sp.audio_features(uris[i: i + chunkSz])
             organized_features = organized_objs(features50)
             for feature in organized_features:
-                out_file_temp.write(feature)
+                out_file.write(feature)
         featuresRest = sp.audio_features(uris[-extra:])
         organized_features = organized_objs(featuresRest)
         for feature in organized_features:
-            out_file_temp.write(feature)
+            out_file.write(feature)
 
     # return features
 

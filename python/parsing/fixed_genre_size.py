@@ -31,6 +31,7 @@ id_len = len('TRTQFGC128F422F013')
 for feature_file in files:
     with open(feature_file, 'r') as in_file:
         with open(dir + 'eq_genre'+feature_file[len(dir):], 'w+') as out_file:
+            print('working on out file', feature_file)
             for i, line in enumerate(in_file):
                 if i == 0:
                     out_file.write(line)
