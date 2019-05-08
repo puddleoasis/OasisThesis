@@ -19,7 +19,7 @@ Marsyas = low_level_feature_dir + 'Marsyas_Timbral.csv'
 RH = mid_level_feature_dir + 'Rhythm_Histograms.csv'
 SSD = mid_level_feature_dir + 'Statistical_Spectrum_Descriptors.csv'
 Spotify = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/spotify_features.csv'
-feature_dicts = {AoM: {}, MoM: {}, LPC: {}, MFCC: {}, Spec_All: {}, Spec_All_Deriv: {}, Marsyas: {}, RH: {}, SSD: {}, Spotify: {}}
+feature_dicts = {Spotify: {}, AoM: {}, MoM: {}, LPC: {}, MFCC: {}, Spec_All: {}, Spec_All_Deriv: {}, Marsyas: {}, RH: {}, SSD: {}}
 features = ['AoM', 'MoM', 'LPC', 'MFCC', 'Spec_All', 'Spec_All_Deriv', 'Marsyas', 'RH', 'SSD', 'Spotify']
 
 out_dir = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/CSV_Partitions/'
@@ -27,16 +27,10 @@ feat = [('AoM', {AoM}), ('MoM', {MoM}), ('LPC', {LPC}), ('MFCC', {MFCC}), ('Spec
         ('Spec_All_Deriv', {Spec_All_Deriv}), ('Marsyas', {Marsyas}), ('RH', {RH}), ('SSD', {SSD}),
         ('Spotify', {Spotify}), ('RH_SSD_jMir_deriv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All_Deriv}),
         ('RH_SSD_jMir_noderiv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All}),
-        ('RH_SSD_MARSYAS', {RH, SSD, Marsyas}), ('RH_SSD', {RH, SSD})]
+        ('RH_SSD_MARSYAS', {RH, SSD, Marsyas}), ('RH_SSD', {RH, SSD}), ('ALL', {RH, SSD, Marsyas, Spotify})]
 out_files = {out_dir + featname + '.csv': path for featname, path in feat}
 print(out_files)
 
-# RH_SSD = 'RH_SSD.csv'
-# RH_SSD_jMir_deriv = 'RH_SSD_jMir_deriv.csv'
-# RH_SSD_jMir_noderiv = 'RH_SSD_jMir_noderiv.csv'
-# RH_SSD_MARSYAS = 'RH_SSD_MARSYAS.csv'
-# out_files = {out_dir + RH_SSD: {SSD, RH}, out_dir + RH_SSD_jMir_noderiv: {SSD, RH, AoM, MoM, LPC, MFCC, Spec_All},
-#              out_dir + RH_SSD_jMir_deriv: {SSD, RH, AoM, MoM, LPC, MFCC, Spec_All_Deriv}, out_dir + RH_SSD_MARSYAS: {SSD, RH, Marsyas}}
 
 master_cvs_IN_PATH = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/IDs_and_Genre.csv'
 
@@ -57,11 +51,11 @@ for feature in feature_dicts:
             line = line.rstrip().rstrip(',').split(',')
             feature_id = line[-1].lstrip('\'').rstrip('\'')
 
-            if 'spotify' not in feature:
-                if feature_id in msd_track_ids_included:
+            if feature is Spotify:
+                if feature_id in spotify_track_ids_included:
                     feature_dicts[feature][feature_id] = ','.join(line[:-1])
             else:
-                if feature_id in spotify_track_ids_included:
+                if feature_id in msd_track_ids_included:
                     feature_dicts[feature][feature_id] = ','.join(line[:-1])
 
 with open(master_cvs_IN_PATH, "r") as master_IN:
@@ -76,17 +70,21 @@ with open(master_cvs_IN_PATH, "r") as master_IN:
                 msd_id = line[0]
                 spotify_id = line[1]
 
-                idstxt = ','.join(line[:-1])
+                idstxt = ','.join(line[:-1]) + ','
                 genre = line[-1]
 
                 feature_str = ''
                 try:
                     for feature_key in included_feature_paths:
-                        feature_str += (feature_dicts[feature_key][msd_id] + ',')
+                        if feature_key == Spotify:
+                            feature_str += (feature_dicts[feature_key][spotify_id] + ',')
+                        else:
+                            feature_str += (feature_dicts[feature_key][msd_id] + ',')
                     # spot_features = feature_dicts[Spotify][spotify_id]
-                    spot_features = '' + ','
-                    spot_features = ''
-                    s = idstxt + ',' + feature_str + spot_features + genre
+                    # spot_features = '' + ','
+                    # spot_features = ''
+                    # s = idstxt + ',' + feature_str + spot_features + genre
+                    s = idstxt + feature_str + genre
                     the_out_file.write(s)
                 except:
                     exceptions += 1
