@@ -23,11 +23,14 @@ feature_dicts = {Spotify: {}, AoM: {}, MoM: {}, LPC: {}, MFCC: {}, Spec_All: {},
 features = ['AoM', 'MoM', 'LPC', 'MFCC', 'Spec_All', 'Spec_All_Deriv', 'Marsyas', 'RH', 'SSD', 'Spotify']
 
 out_dir = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/CSV_Partitions/'
-feat = [('AoM', {AoM}), ('MoM', {MoM}), ('LPC', {LPC}), ('MFCC', {MFCC}), ('Spec_All', {Spec_All}),
-        ('Spec_All_Deriv', {Spec_All_Deriv}), ('Marsyas', {Marsyas}), ('RH', {RH}), ('SSD', {SSD}),
-        ('Spotify', {Spotify}), ('RH_SSD_jMir_deriv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All_Deriv}),
-        ('RH_SSD_jMir_noderiv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All}),
-        ('RH_SSD_MARSYAS', {RH, SSD, Marsyas}), ('RH_SSD', {RH, SSD}), ('ALL', {RH, SSD, Marsyas, Spotify})]
+# feat = [('AoM', {AoM}), ('MoM', {MoM}), ('LPC', {LPC}), ('MFCC', {MFCC}), ('Spec_All', {Spec_All}),
+#         ('Spec_All_Deriv', {Spec_All_Deriv}), ('Marsyas', {Marsyas}), ('RH', {RH}), ('SSD', {SSD}),
+#         ('Spotify', {Spotify}), ('RH_SSD_jMir_deriv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All_Deriv}),
+#         ('RH_SSD_jMir_noderiv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All}),
+#         ('RH_SSD_MARSYAS', {RH, SSD, Marsyas}), ('RH_SSD', {RH, SSD}), ('ALL', {RH, SSD, Marsyas, Spotify})]
+feat = [('MARSYAS_Spotify', {Marsyas, Spotify}), ('RH_Spotify', {RH, Spotify}), ('SSD_Spotify', {SSD, Spotify}),
+        ('jMir_deriv_Spotify', {AoM, MoM, LPC, MFCC, Spec_All_Deriv}), ('LPC_Spotify', {LPC, Spotify}), ('MoM_Spotify', {MoM, Spotify}),
+        ('ALL', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All, Spec_All_Deriv, Marsyas, Spotify})]
 out_files = {out_dir + featname + '.csv': path for featname, path in feat}
 print(out_files)
 
