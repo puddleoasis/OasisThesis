@@ -1,7 +1,7 @@
 songs_per_genre = 500
 
 # dir = '/home/oasisn/Desktop/Thesis_CSVs/'
-dir = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/CSV_Partitions/All_Instances/'
+dir = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/CSV_Partitions/poster_pass/'
 # RH_SSD = 'RH_SSD.csv'
 # RH_SSD_jMir_deriv = 'RH_SSD_jMir_deriv.csv'
 # RH_SSD_jMir_noderiv = 'RH_SSD_jMir_noderiv.csv'

@@ -28,9 +28,34 @@ out_dir = '/Users/libuser/Desktop/OasisThesis/OasisThesisDownloads/Building_CSV/
 #         ('Spotify', {Spotify}), ('RH_SSD_jMir_deriv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All_Deriv}),
 #         ('RH_SSD_jMir_noderiv', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All}),
 #         ('RH_SSD_MARSYAS', {RH, SSD, Marsyas}), ('RH_SSD', {RH, SSD}), ('ALL', {RH, SSD, Marsyas, Spotify})]
-feat = [('MARSYAS_Spotify', {Marsyas, Spotify}), ('RH_Spotify', {RH, Spotify}), ('SSD_Spotify', {SSD, Spotify}),
-        ('jMir_deriv_Spotify', {AoM, MoM, LPC, MFCC, Spec_All_Deriv}), ('LPC_Spotify', {LPC, Spotify}), ('MoM_Spotify', {MoM, Spotify}),
-        ('ALL', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All, Spec_All_Deriv, Marsyas, Spotify})]
+# feat = [('MARSYAS_Spotify', {Marsyas, Spotify}), ('RH_Spotify', {RH, Spotify}), ('SSD_Spotify', {SSD, Spotify}),
+#         ('jMir_deriv_Spotify', {AoM, MoM, LPC, MFCC, Spec_All_Deriv}), ('LPC_Spotify', {LPC, Spotify}), ('MoM_Spotify', {MoM, Spotify}),
+#         ('ALL', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All, Spec_All_Deriv, Marsyas, Spotify})]
+
+
+#  this is the data i want my chart for Steinmetz Poster
+feat = [
+    ('Spotify', {Spotify}),
+    ('MoM', {MoM}),
+    ('MoM_Spotify', {MoM, Spotify}),
+    ('LPC', {LPC}),
+    ('LPC_Spotify', {LPC, Spotify}),
+    ('jMir', {AoM, MoM, LPC, MFCC, Spec_All_Deriv}),
+    ('jMir_Spotify', {AoM, MoM, LPC, MFCC, Spec_All_Deriv, Spotify}),
+    ('RH', {RH}),
+    ('RH_Spotify', {RH, Spotify}),
+    ('SSD', {SSD}),
+    ('SSD_Spotify', {SSD, Spotify}),
+    ('RH_SSD', {RH, SSD}),
+    ('RH_SSD_Spotify', {RH, SSD, Spotify}),
+    ('Marsyas', {Marsyas}),
+    ('Marsyas_Spotify', {Marsyas, Spotify}),
+    ('RH_SSD_Marsyas', {RH, SSD, Marsyas}),
+    ('RH_SSD_Marsyas_Spotify', {RH, SSD, Marsyas, Spotify}),
+    ('ALL', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All, Spec_All_Deriv, Marsyas}),
+    ('ALL_Spotify', {RH, SSD, AoM, MoM, LPC, MFCC, Spec_All, Spec_All_Deriv, Marsyas, Spotify}),
+]
+
 out_files = {out_dir + featname + '.csv': path for featname, path in feat}
 print(out_files)
 
